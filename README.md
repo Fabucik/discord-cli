@@ -14,7 +14,8 @@ CLI tool to get data about your discord servers and profile
 - Turn on developer mode in your Discord account
 - Go to https://discord.com/developers/applications
 - Create new application
-- Copy Client Secret and Client ID, and put them in .env file in this format: `CLIENTID=<id>` and `CLIENTSECRET=<secret>`, replace id and secret with your client ID and secret
+- In OAuth2 section save client ID and client Secret for later
 - cd to project's directory and run: make
 - Add /your/directory/discord-cli/bin to the PATH environment variable using `export PATH=$PATH:/your/directory/discord-cli/bin` (replace /your/directory with directory where discord-cli is installed)
-- open .profile file in your home directory and append at the end: `export CLIENTID=<id>` and on a new line `export CLIENTSECRET=<secret>`, again replace id and secret with your client ID and secret
+- Open .profile file in your home directory and append at the end: `export CLIENTID=<id>` and on a new line `export CLIENTSECRET=<secret>`, again replace id and secret with your client ID and secret
+- Once you're done doing that, type `source .profile` and you are ready to go!
