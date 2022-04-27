@@ -19,5 +19,5 @@ func GetBearer() string {
 }
 
 func GetEndpoint() string {
-	return "https://discord.com/api"
+	return "https://discord.com/api/v8"
 }
