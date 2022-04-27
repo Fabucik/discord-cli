@@ -8,10 +8,14 @@ import (
 	"log";
 	"encoding/json";
 	"fmt";
+	"io/ioutil"
 )
 
 func Host(ch *chan bool) {
-	authUrl := "https://discord.com/api/oauth2/authorize?client_id=967834035776802876&redirect_uri=http%3A%2F%2F127.0.0.1%3A3369&response_type=code&scope=identify%20guilds%20guilds.members.read"
+	godotenv.Load()
+	clientId := os.Getenv("CLIENTID")
+
+	authUrl := "https://discord.com/api/oauth2/authorize?client_id=" + clientId + "&redirect_uri=http%3A%2F%2F127.0.0.1%3A3369&response_type=code&scope=identify%20guilds%20guilds.members.read"
 
 	fmt.Println("Authorize this app here: " + authUrl)
 
@@ -46,12 +50,10 @@ func GetToken(w http.ResponseWriter, request *http.Request, ch *chan bool) {
 
 	user := os.Getenv("USER")
 
-	f, err := os.OpenFile("/home/" + user + "/.discord-cli/TOKENSECRET.txt", os.O_RDWR, 0644)
+	err = ioutil.WriteFile("/home/" + user + "/.discord-cli/TOKENSECRET.txt", []byte(r["access_token"]), 0777)
 	if err != nil {
         log.Fatalln(err)
     }
-
-	f.WriteString(r["access_token"])
 
 	*ch <- true
 }

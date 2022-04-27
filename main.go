@@ -20,22 +20,18 @@ func main() {
 
 	switch args[0] {
 	case "auth":
+		user := os.Getenv("USER")
+
+		os.Mkdir("/home/" + user + "/.discord-cli", 0777)
+
+		os.Create("/home/" + user + "/.discord-cli/TOKENSECRET.txt")
+
 		ch := make(chan bool, 1)
 		go auth.Host(&ch)
 
 		<-ch
 
-		user := os.Getenv("USER")
-
-		err := os.Mkdir("/home/" + user + "/.discord-cli", 0777)
-		if err != nil {
-			
-		}
-
-		_, err = os.Create("/home/" + user + "/.discord-cli/memberinfo.txt")
-		if err != nil {
-			
-		}
+		os.Create("/home/" + user + "/.discord-cli/memberinfo.txt")
 
 		fmt.Println("Succefully authenticated!")
 	
@@ -51,7 +47,7 @@ func main() {
 			log.Fatalln(err)
 		}
 
-		fmt.Println("Username: " + r["username"] + r["discriminator"] + "\n" + "ID: " + r["id"])
+		fmt.Println("Username: " + r["username"] + "#" + r["discriminator"] + "\n" + "ID: " + r["id"])
 
 		fmt.Println("Wrote output to " + "/home/" + user + "/.discord-cli/memberinfo.txt")
 		
