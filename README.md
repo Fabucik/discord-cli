@@ -10,7 +10,6 @@ CLI tool to get data about your discord servers and profile
 **Go language is required, if you don't have it installed, see: https://go.dev/doc/install**
 
 # Get Started
-- Create file called ".env" in this project's directory
 - Turn on developer mode in your Discord account
 - Go to https://discord.com/developers/applications
 - Create new application
